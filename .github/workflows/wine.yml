@@ -29,11 +29,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v6
         with:
           context: ./wine
           file: ./wine/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
+            ghcr.io/pelican-eggs/yolks:wine_${{ matrix.tag }}
             ghcr.io/parkervcp/yolks:wine_${{ matrix.tag }}

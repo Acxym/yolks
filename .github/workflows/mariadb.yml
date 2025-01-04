@@ -23,6 +23,8 @@ jobs:
           - '10.6'
           - '10.7'
           - '11.2'
+          - '11.3'
+          - '11.4'
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-qemu-action@v3
@@ -34,11 +36,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v6
         with:
           context: ./mariadb
           file: ./mariadb/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
+            ghcr.io/pelican-eggs/yolks:mariadb_${{ matrix.tag }}
             ghcr.io/parkervcp/yolks:mariadb_${{ matrix.tag }}

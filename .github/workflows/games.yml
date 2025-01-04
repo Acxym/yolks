@@ -20,9 +20,11 @@ jobs:
           - arma3
           - dayz                
           - mohaa
+          - rust
           - samp
           - source
           - valheim
+          - thebattleforwesnoth
           
     steps:
       - uses: actions/checkout@v4
@@ -34,13 +36,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v6
         with:
           context: ./games/${{ matrix.game }}
           file: ./games/${{ matrix.game }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
+            ghcr.io/pelican-eggs/games:${{ matrix.game }}
             ghcr.io/parkervcp/games:${{ matrix.game }}
   pushAll:
     name: "games_All:${{ matrix.game }}"
@@ -65,11 +68,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v6
         with:
           context: ./games/${{ matrix.game }}
           file: ./games/${{ matrix.game }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
+            ghcr.io/pelican-eggs/games:${{ matrix.game }}
             ghcr.io/parkervcp/games:${{ matrix.game }}
