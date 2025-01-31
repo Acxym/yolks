@@ -1,1 +1,1 @@
-FROM ghcr.nju.edu.cn/liteldev/levilamina-server:latest-wine
+FROM ghcr.io/liteldev/levilamina-server:latest-wine
