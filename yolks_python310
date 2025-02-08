@@ -1,0 +1,1 @@
+FROM Python 3.10|ghcr.io/parkervcp/yolks:python_3.10
